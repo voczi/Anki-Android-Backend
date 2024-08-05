@@ -17,8 +17,8 @@ fn main() -> Result<()> {
         return Ok(());
     }
     let ndk_path = Utf8PathBuf::from(env::var("ANDROID_NDK_HOME").unwrap_or_default());
-    if !ndk_path.file_name().unwrap_or_default().starts_with("26.") {
-        panic!("Expected ANDROID_NDK_HOME to point to a 26.x NDK. Future versions may work, but are untested.");
+    if ndk_path.file_name().unwrap_or_default().is_empty() {
+        panic!("Expected ANDROID_NDK_HOME to point to a NDK. Future versions may work, but are untested.");
     }
 
     build_web_artifacts()?;
@@ -125,7 +125,7 @@ fn build_android_jni() -> Result<()> {
     let ndk_targets = add_android_rust_targets(all_archs)?;
     let (is_release, _release_dir) = check_release(false);
 
-    Command::run("cargo install cargo-ndk@3.3.0")?;
+    Command::run("cargo install cargo-ndk@3.5.4")?;
 
     let mut command = Command::new("cargo");
     command
@@ -207,39 +207,12 @@ fn build_robolectric_jni() -> Result<()> {
         |platform: &str, fname: &str| target_root.join(platform).join(release_dir).join(fname);
 
     if all_archs {
-        if cfg!(not(target_os = "macos")) {
-            panic!("Must be on macOS to do a multi-arch build.");
-        }
-
-        let mac_targets = &["x86_64-apple-darwin", "aarch64-apple-darwin"];
-        add_rust_targets(mac_targets)?;
-        for target in mac_targets {
-            build_rsdroid(is_release, target, target_root)?;
-        }
-        Command::new("lipo")
-            .arg("-create")
-            .args(&[
-                file_in_target("x86_64-apple-darwin", "librsdroid.dylib"),
-                file_in_target("aarch64-apple-darwin", "librsdroid.dylib"),
-            ])
-            .arg("-output")
-            .arg(jni_dir.join("librsdroid.dylib"))
-            .ensure_success()?;
-
         let linux_targets = &["x86_64-unknown-linux-gnu"];
         add_rust_targets(linux_targets)?;
         build_rsdroid(is_release, linux_targets[0], target_root)?;
         copy_file(
             file_in_target(linux_targets[0], "librsdroid.so"),
             jni_dir.join("librsdroid.so"),
-        )?;
-
-        let windows_targets = &["x86_64-pc-windows-gnu"];
-        add_rust_targets(windows_targets)?;
-        build_rsdroid(is_release, windows_targets[0], target_root)?;
-        copy_file(
-            file_in_target(windows_targets[0], "rsdroid.dll"),
-            jni_dir.join("rsdroid.dll"),
         )?;
     } else {
         // Just build for current architecture
