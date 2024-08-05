@@ -44,7 +44,7 @@ jar {
     doLast {
         def jarFile = new JarFile(archiveFile.get().getAsFile())
         int libCount = jarFile.entries().toList().count { it.name.contains(".so") || it.name.contains(".dll") || it.name.contains(".dylib") }
-        if (libCount == 0 || (System.getenv("ALL_ARCHS") == "1" && libCount != 3)) {
+        if (libCount == 0 || (System.getenv("ALL_ARCHS") == "1" && libCount != 1)) {
             throw new GradleException("Jar appears to be missing shared library!")
         }
     }

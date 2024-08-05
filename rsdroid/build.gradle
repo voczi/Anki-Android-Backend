@@ -98,7 +98,7 @@ afterEvaluate {
             def aarFile = bundleAarTask.outputs.files.singleFile
             def zipFile = new ZipFile(aarFile)
             int libCount = zipFile.entries().toList().count { it.name.contains(".so") }
-            if (libCount == 0 || (System.getenv("ALL_ARCHS") == "1" && libCount != 4)) {
+            if (libCount == 0 || (System.getenv("ALL_ARCHS") == "1" && libCount != 2)) {
                 throw new GradleException("AAR appears to be missing shared library!")
             }
         }

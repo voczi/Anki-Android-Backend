@@ -160,16 +160,10 @@ fn check_release(force_release_on_windows: bool) -> (bool, &'static str) {
 fn add_android_rust_targets(all_archs: bool) -> Result<&'static [&'static str]> {
     Ok(if all_archs {
         add_rust_targets(&[
-            "armv7-linux-androideabi",
-            "i686-linux-android",
             "aarch64-linux-android",
             "x86_64-linux-android",
         ])?;
         &[
-            "-t",
-            "armv7-linux-androideabi",
-            "-t",
-            "i686-linux-android",
             "-t",
             "aarch64-linux-android",
             "-t",
