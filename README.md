@@ -46,7 +46,7 @@ On Windows:
 In Android Studio, choose the Tools>SDK Manager menu option.
 
 - In SDK tools, enable "show package details"
-- Choose NDK version 27.0.12077973
+- Choose NDK version 28.0.12433566
 - After downloading, you may need to restart Android Studio to get it to
 synchronize gradle.
 
@@ -82,19 +82,19 @@ eg on Linux:
 
 ```
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-export ANDROID_NDK_HOME=$HOME/Android/Sdk/ndk/27.0.12077973
+export ANDROID_NDK_HOME=$HOME/Android/Sdk/ndk/28.0.12433566
 ```
 
 Or macOS:
 
 ```
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
-export ANDROID_NDK_HOME=$HOME/Library/Android/sdk/ndk/27.0.12077973
+export ANDROID_NDK_HOME=$HOME/Library/Android/sdk/ndk/28.0.12433566
 ```
 Or Windows using Powershell:
 
 ```
-$env:ANDROID_NDK_HOME="$env:ANDROID_SDK_ROOT\ndk\27.0.12077973"
+$env:ANDROID_NDK_HOME="$env:ANDROID_SDK_ROOT\ndk\28.0.12433566"
 ```
 If you don't have Java installed, you may be able to use the version bundled
 with Android Studio. Eg on macOS:

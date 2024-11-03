@@ -17,8 +17,8 @@ fn main() -> Result<()> {
         return Ok(());
     }
     let ndk_path = Utf8PathBuf::from(env::var("ANDROID_NDK_HOME").unwrap_or_default());
-    if !ndk_path.file_name().unwrap_or_default().starts_with("27.") {
-        panic!("Expected ANDROID_NDK_HOME to point to a 27.x NDK. Future versions may work, but are untested.");
+    if !ndk_path.file_name().unwrap_or_default().starts_with("28.") {
+        panic!("Expected ANDROID_NDK_HOME to point to a 28.x NDK. Future versions may work, but are untested.");
     }
 
     build_web_artifacts()?;

@@ -19,7 +19,7 @@ env:
   ALL_ARCHS: 1
   RELEASE: 1
   CARGO_PROFILE_RELEASE_LTO: fat
-  ANDROID_NDK_VERSION: "27.0.12077973"
+  ANDROID_NDK_VERSION: "28.0.12433566"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event.inputs.mavenPublish }}-release

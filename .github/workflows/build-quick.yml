@@ -12,7 +12,7 @@ on:
 
 env:
   DEBUG: 1
-  ANDROID_NDK_VERSION: "27.0.12077973"
+  ANDROID_NDK_VERSION: "28.0.12433566"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
